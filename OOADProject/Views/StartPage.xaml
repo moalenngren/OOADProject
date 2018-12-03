@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="OOADProject.StartPage"
+             xmlns:local="clr-namespace:OOADProject;Assembly=OOADProject" 
+             BackgroundColor="Silver" 
+             BindingContext="{local:StartPageViewModel}">
+    <ContentPage.Content>
+         <StackLayout VerticalOptions="Center">
+            <Label Text="Welcome! Enter band name to see the nearest concerts." VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" TextColor="Black" />
+            <Entry Placeholder="Enter band name here"/>
+            <Button Text="SEARCH GIGS" CommandParameter="SEARCH" Command="{Binding SearchCommand}"/>
+            </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
