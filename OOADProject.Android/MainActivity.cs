@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms.Platform.Android;
+using Android.Content.PM;
 
 namespace OOADProject.Droid
 {
@@ -19,6 +21,7 @@ namespace OOADProject.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            global::Xamarin.FormsMaps.Init(this, savedInstanceState); //added here
             LoadApplication(new App());
         }
     }

@@ -5,6 +5,8 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
+using Xamarin.Forms;
+
 namespace OOADProject.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -23,6 +25,7 @@ namespace OOADProject.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.FormsMaps.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
