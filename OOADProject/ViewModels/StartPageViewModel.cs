@@ -9,24 +9,35 @@ namespace OOADProject
 {
     public class StartPageViewModel : INotifyPropertyChanged
     {
-        //public System.Collections.Generic.IList<Xamarin.Forms.Behavior> Behaviors { get; } //????????
 
-       public ValidatableObject<string> Name { get; set; } = new ValidatableObject<string>() { Value = "" };
-         
-     
+        public ValidatableObject<string> Name { get; set; } = new ValidatableObject<string>() { Value = "" };
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ICommand SearchCommand { private set; get; }
 
         public ICommand ValidateBandNameCommand { private set; get; }
-       
-         public StartPageViewModel()
+
+        private string welcomeString = "Welcome! Enter artist to find upcoming shows.";
+
+        public string WelcomeString
+        {
+            get { return welcomeString; }
+            set
+            {
+                SetProperty(ref welcomeString, value);
+            }
+        }
+
+        public StartPageViewModel()
         {
             SearchCommand = new Command<string>(
             execute: SearchButton,
-                canExecute: obj => {
+                canExecute: obj =>
+                {
                     return Name.IsValid;
-             } //TODO - put this here _bandName.IsValid;
+                }
             );
 
             ValidateBandNameCommand = new Command<TextChangedEventArgs>(ValidateByChange);
@@ -39,11 +50,10 @@ namespace OOADProject
         //Adding validations to bandname
         private void AddValidations()
         {
-         Name.Validations.Add(new IsNotNullOrEmptyRule<string>
+            Name.Validations.Add(new IsNotNullOrEmptyRule<string>
             {
                 ValidationMessage = "A bandname is required."
             });
-
             //Maybe add validation that checks if band name exists in database?
         }
 
@@ -53,13 +63,11 @@ namespace OOADProject
             return isValidBand;
         }
 
-        //Validate method on class ValidatableObject
         private bool ValidateBandName()
         {
             return Name.Validate();
         }
 
-        //When writing a letter in entry
         private void ValidateByChange(TextChangedEventArgs obj)
         {
             Validate();
@@ -68,35 +76,28 @@ namespace OOADProject
 
         private void SearchButton(string obj)
         {
-
             SearchBands(obj);
-
-            //RefreshCanExecute???
-
-
-            //MessagingCenter.Send(this, "Result", "Sticky Fingers");
-
-            //MessagingCenter.Send("Sticky Fingers", "Update");
-
-            //App.Current.MainPage.Navigation.PushAsync(new //ResultPage());
-            //MessengerInstance.Send(new NavigateToViewNotification() { ToView = "Dashboard" });
         }
 
         private void RefreshCanExecute()
         {
             (SearchCommand as Command).ChangeCanExecute();
-
         }
 
-
-
-        /*async*/
         void SearchBands(string obj)
         {
-            List<Gig> gigList = APIModel.getGigs();
-            //List<Gig> result = /*await*/ APIModel.getGigs(); //call to api here
-            //await Navigation.PushAsync(new ResultPage(result));
-            Application.Current.MainPage.Navigation.PushAsync(new ResPage(gigList));
+            List<Gig> gigList = APIModel.getGigs(Name.Value);
+            if (gigList.Count > 0)
+            {
+                Application.Current.MainPage.Navigation.PushAsync(new ResPage(gigList));
+            }
+            else
+            {
+                Name.IsValid = false;
+                WelcomeString = "Sorry. Try again!";
+                Name.Value = "";
+                RefreshCanExecute();
+            }
         }
 
         bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)

@@ -8,7 +8,7 @@
              >
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
-            <Label Text="Welcome! Enter band name to see the nearest concerts." VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" TextColor="Black" />
+            <Label Text="{Binding WelcomeString}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" TextColor="Black" />
             <Entry Placeholder="Enter band name here" Text="{Binding Name.Value, Mode=TwoWay}"  Keyboard="Text">
              <Entry.Behaviors> 
                 <behaviors:EventToCommandBehavior  

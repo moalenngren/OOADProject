@@ -15,13 +15,13 @@ namespace OOADProject
 
         private static string gigUrl = "https://rest.bandsintown.com";
         private static string appId = "297c11ac1d5e9ee79d6360d2123be779";
-        private string bandName;
+        //private string bandName;
 
         static HttpClient client = new HttpClient();
 
-        public APIModel(string bandName)
+        public APIModel(/*string bandName*/)
         {
-            this.bandName = bandName;
+           // this.bandName = bandName;
         }
 
         /*
@@ -53,9 +53,9 @@ namespace OOADProject
 
         } */
 
-        /*async*/ public static List<Gig> getGigs() //How to recieve list with string, doctionary and string, string???
+        /*async*/ public static List<Gig> getGigs(string bandName) //How to recieve list with string, doctionary and string, string???
         {
-            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(string.Format(gigUrl + "/artists/" + "BrowsingCollection" + "/events?app_id=" + appId));
+            HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(string.Format(gigUrl + "/artists/" + bandName + "/events?app_id=" + appId));
 
             WebReq.Method = "GET";
 
@@ -71,9 +71,16 @@ namespace OOADProject
                 jsonString = reader.ReadToEnd();
             }
 
-            return JsonConvert.DeserializeObject<List<Gig>> (jsonString);
+            try
+            {
+                return JsonConvert.DeserializeObject<List<Gig>>(jsonString);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new List<Gig>();
+            }
 
-            //Console.WriteLine(gigs.Count); 
         }
 
     }
