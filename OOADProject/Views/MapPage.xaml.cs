@@ -9,9 +9,13 @@ namespace OOADProject
     public partial class MapPage : ContentPage
     {
         Map map;
-        public MapPage()
+        List<Gig> gigList;
+
+        public MapPage(List<Gig> gigList)
         {
             InitializeComponent();
+
+            this.gigList = gigList;
 
             map = new Map(MapSpan.FromCenterAndRadius(
             new Position(36.8961, 10.1865),
@@ -23,18 +27,7 @@ namespace OOADProject
 
             map.MapType = MapType.Street;
 
-            var slider = new Slider(1, 18, 1);
-            slider.ValueChanged += (sender, e) => {
-                var zoomLevel = e.NewValue; // between 1 and 18
-                var latlongdegrees = 360 / (Math.Pow(2, zoomLevel));
-                if (map.VisibleRegion != null)
-                    map.MoveToRegion(new MapSpan(map.VisibleRegion.Center, latlongdegrees, latlongdegrees));
-            };
-
-            var stack = new StackLayout { Spacing = 0 };
-            stack.Children.Add(map);
-            stack.Children.Add(slider);
-            Content = stack;
+            Content = map; //stack
 
             var pos1 = new Position(36.891, 10.1865);
             var pos2 = new Position(36.892, 10.1864);

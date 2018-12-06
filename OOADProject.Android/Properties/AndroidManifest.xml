@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.moalenngren.OOADProject">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -13,4 +13,4 @@
 		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyAffFabw_A7k4nVKdTbi5z1gKWipKcvrkk" />
 		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
 	</application>
-	</manifest>
+</manifest>

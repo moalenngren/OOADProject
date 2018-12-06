@@ -32,46 +32,27 @@ namespace OOADProject
             }
         }
 
-        public ResultPageViewModel(/*List<GigClass> gigList*/)
+        public ResultPageViewModel(List<Gig> gigList)
         {
 
-            App.Current.MainPage.Title = "Band name" + " gigs";
-            //this._gigList = gigList;
+            App.Current.MainPage.Title = "Band name" + " gigs"; //Does not work
+                                                                //this._gigList = gigList;
 
-            this._gigList = new List<Gig>();
+            this._gigList = gigList; // new List<Gig>();
 
-            Gig gig1 = new Gig();
-            gig1.Venue = "Skövde Kulturhus";
-            gig1.City = "Skövde";
-            gig1.Country = "Sweden";
-            gig1.Date = DateTime.Parse("2017-03-19T11:00:00");
-            gig1.Latitude = "36.12714";
-            gig1.Longitude = "-115.1629562";
-
-            Gig gig2 = new Gig();
-            gig2.Venue = "Cocktails and Beer";
-            gig2.City = "Las Vegas";
-            gig2.Country = "USA";
-            gig2.Date = DateTime.Parse("2017-03-19T11:00:00");
-            gig2.Latitude = "36.12714";
-            gig2.Longitude = "-115.1629562";
-
-            _gigList.Add(gig1);
-            _gigList.Add(gig2);
-
-
+            /* HUR GÖRA DETTA???
             MessagingCenter.Subscribe<string>(this, "AddNew", (arg) =>
             {
                 Gig gig3 = new Gig();
-                gig3.Venue = arg;
-                gig3.City = "Gothenburg";
-                gig3.Country = "SWEDEN";
-                gig3.Date = DateTime.Parse("2017-03-19T11:00:00");
-                gig3.Latitude = "36.12714";
-                gig3.Longitude = "-115.1629562";
+                //gig3.Venue = "";
+                gig3.Venue.City = "Gothenburg";
+                gig3.Venue.Country = "SWEDEN";
+                gig3.DateTime = "2017-03-19T11:00:00";
+                gig3.Venue.Latitude = "36.12714";
+                gig3.Venue.Longitude = "-115.1629562";
 
                 _gigList.Add(gig3);
-            });
+            }); */
 
 
             /*MessengerInstance.Register<NavigateToViewNotification>(this, ntv => {
@@ -80,22 +61,22 @@ namespace OOADProject
                 }); */
         }
 
+        //FIXA DENNA!!!
         void ItemSelected(/*object sender, SelectedItemChangedEventArgs e*/)
         {
             //if (e.SelectedItem == null)
             //return; 
 
-            //await DisplayAlert("Item tapped", "An item was tapped", "OK");
-
 
             //Push to map view, pass lat/long
-            App.Current.MainPage.Navigation.PushAsync(new MapPage());
+            App.Current.MainPage.Navigation.PushAsync(new MapPage(GigList));
         }
 
         void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
             throw new NotImplementedException();
         }
+
 
     }
 }

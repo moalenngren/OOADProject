@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 
-namespace OOADProject
+namespace OOADProject.Views
 {
-    public partial class StartPage : ContentPage
+    public partial class MyPage : ContentPage
     {
-        public StartPage()
+        public MyPage()
         {
             InitializeComponent();
         }

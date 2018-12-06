@@ -1,4 +1,5 @@
 ﻿using System;
+using OOADProject.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,7 @@ namespace OOADProject
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new StartPage());
+            MainPage = new NavigationPage(new MyPage());
         }
 
         protected override void OnStart()

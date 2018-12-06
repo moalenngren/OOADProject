@@ -1,39 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using OOADProject.Classes;
+using OOADProject.Interfaces;
 
 namespace OOADProject
 {
-    public class ValidatableObject<T>
+    public class ValidatableObject<T> : ExtendedBindableObject, IValidity
     {
-        public ValidatableObject()
+        private readonly List<IValidationRule<T>> _validations;
+        private List<string> _errors;
+        private T _value;
+        private bool _isValid;
+
+        public List<IValidationRule<T>> Validations => _validations;
+
+        public List<string> Errors
         {
-
-            _validations = new List<IValidationRule<T>>();
-
-            Errors = new List<string>();
-
-            IsValid = false;
+            get
+            {
+                return _errors;
+            }
+            set
+            {
+                _errors = value;
+                RaisePropertyChanged(() => Errors);
+            }
         }
 
-        
+        public T Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                _value = value;
+                RaisePropertyChanged(() => Value);
+            }
+        }
 
-        private List<IValidationRule<T>> _validations; //Change IVal.. to Val?
+        public bool IsValid
+        {
+            get
+            {
+                return _isValid;
+            }
+            set
+            {
+                _isValid = value;
+                RaisePropertyChanged(() => IsValid);
+            }
+        }
 
-        public List<IValidationRule<T>> Validations; //Change IVal.. to Val?
-
-        public List<string> Errors; //Make this an empty list?? or IEnumerable?
-
-        public bool IsValid;
-
-        public T Value; //String
+        public ValidatableObject()
+        {
+            _isValid = true;
+            _errors = new List<string>();
+            _validations = new List<IValidationRule<T>>();
+        }
 
         public bool Validate()
         {
             Errors.Clear();
 
-            IEnumerable<string> errors = _validations
-                .Where(v => !v.Check(Value))
+            IEnumerable<string> errors = _validations.Where(v => !v.Check(Value))
                 .Select(v => v.ValidationMessage);
 
             Errors = errors.ToList();
@@ -41,8 +73,6 @@ namespace OOADProject
 
             return this.IsValid;
         }
-
-
     }
 
 
