@@ -22,5 +22,6 @@
     <Folder Include="Classes\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>

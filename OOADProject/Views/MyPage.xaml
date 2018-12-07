@@ -5,7 +5,7 @@
              BackgroundColor="White" 
              xmlns:behaviors="clr-namespace:OOADProject;Assembly=OOADProject"
              BindingContext="{behaviors:StartPageViewModel}"
-             >
+             Title="Search">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Center">
             <Label Text="{Binding WelcomeString}" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" TextColor="Black" />

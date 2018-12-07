@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using OOADProject.Classes;
 using Xamarin.Forms;
 
 namespace OOADProject
@@ -12,15 +12,8 @@ namespace OOADProject
         {
             InitializeComponent();
             this.GigList = gigList;
-            BindingContext = new ResultPageViewModel(gigList); //?
-            //BindingContext = viewModel = new DeviceCheckViewModel(this.Navigation);
-        }
 
-        //Move this to VM
-        void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
-        {
-
-            Navigation.PushAsync(new MapPage(GigList));
+            BindingContext = new ResultPageViewModel(gigList);
         }
     }
 }

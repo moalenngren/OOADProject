@@ -9,9 +9,7 @@ namespace OOADProject
 {
     public class StartPageViewModel : INotifyPropertyChanged
     {
-
         public ValidatableObject<string> Name { get; set; } = new ValidatableObject<string>() { Value = "" };
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -46,8 +44,6 @@ namespace OOADProject
             RefreshCanExecute();
         }
 
-
-        //Adding validations to bandname
         private void AddValidations()
         {
             Name.Validations.Add(new IsNotNullOrEmptyRule<string>
@@ -116,7 +112,5 @@ namespace OOADProject
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
     }
 }
